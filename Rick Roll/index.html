@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #start-container, #question-container, #rickroll {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #question {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        #answer {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1rem;
+            width: 80%;
+            max-width: 400px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        #rickroll video {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+        }
+        @media (max-width: 600px) {
+            #question {
+                font-size: 1.2rem;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="start-container">
+        <h1>Welcome to the Questionnaire created by MotherFucker Lipali</h1>
+        <button id="start-button">Start</button>
+    </div>
+    <div id="question-container">
+        <div id="question"></div>
+        <input type="text" id="answer" placeholder="Your answer here">
+        <button id="next-button">Next</button>
+    </div>
+    <div id="rickroll">
+        <h1>Surprise MF!!</h1>
+        <video controls autoplay>
+            <source src="rickroll.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const questions = [
+            "What's your name?",
+            "How old are you?",
+            "Why are you GAY?",
+            "You are GAY!!!!",
+            "You look like a penis, agree?"
+        ];
+
+        let currentQuestionIndex = 0;
+
+        const startContainer = document.getElementById('start-container');
+        const questionContainer = document.getElementById('question-container');
+        const questionElement = document.getElementById('question');
+        const answerInput = document.getElementById('answer');
+        const nextButton = document.getElementById('next-button');
+        const rickroll = document.getElementById('rickroll');
+        const startButton = document.getElementById('start-button');
+
+        startButton.addEventListener('click', () => {
+            startContainer.style.display = 'none';
+            questionContainer.style.display = 'flex';
+            showQuestion();
+        });
+
+        nextButton.addEventListener('click', () => {
+            const answer = answerInput.value.trim();
+            if (answer) {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    showQuestion();
+                } else {
+                    endQuiz();
+                }
+            } else {
+                alert('Please provide an answer before proceeding.');
+            }
+        });
+
+        function showQuestion() {
+            questionElement.textContent = questions[currentQuestionIndex];
+            answerInput.value = '';
+        }
+
+        function endQuiz() {
+            questionContainer.style.display = 'none';
+            rickroll.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
